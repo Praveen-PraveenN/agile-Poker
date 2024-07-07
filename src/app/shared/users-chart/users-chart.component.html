@@ -1,0 +1,44 @@
+<!-- users-and-chart.component.html -->
+
+<!-- Grid Container -->
+<div class="grid-container">
+
+    <!-- Left Side: Users List -->
+    <div class="left-side table-container">
+      <table mat-table [dataSource]="users" class="mat-elevation-z8">
+        <!-- Username Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> <b>User</b>  </th>
+          <td mat-cell *matCellDef="let user"> {{ user.userName }} </td>
+        </ng-container>
+        <!-- Story Points Column -->
+        <ng-container matColumnDef="points">
+          <th mat-header-cell *matHeaderCellDef> <b>Points</b> </th>
+          <td mat-cell *matCellDef="let user">
+             <!-- {{ user.selectedCard > 0 ? reveal ? user.selectedCard : '👍' : '👎'}} -->
+            <span *ngIf="reveal" >{{user.selectedCard}}</span>
+             <mat-icon style="color: rgb(179, 179, 62);" *ngIf="user.selectedCard > 0 && !reveal">thumb_up</mat-icon>
+             <mat-icon style="color: red;" *ngIf="user.selectedCard <= 0 && !reveal">thumb_down</mat-icon>
+
+             </td>
+        </ng-container>
+        <!-- Table Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  
+    <!-- Right Side: Chart -->
+    <div class="right-side">
+      <div class="chart-container" *ngIf="reveal">
+        <!-- Replace with your chart component or HTML -->
+         <div>
+            <h2>Average : {{averagePoints}}</h2>
+         </div>
+        <canvasjs-chart *ngIf="reveal" [options]="chartOptions"
+        [styles]="{width: '80%', height:'200px'}"></canvasjs-chart>
+      </div>
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,22 @@
+.user-form {
+    padding: 20px; /* Example padding */
+  }
+  
+  .mat-form-field {
+    width: 100%; /* Ensure input field takes up full width within its container */
+  }
+  
+  button {
+    min-width: 150px; /* Example minimum width for the button */
+    margin-left: 10px;
+  }
+  
+  /* app.component.css or your specific component CSS/SCSS file */
+
+.background-image-container {
+  background-image: url('../../../assets/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100px; /* Make sure the container covers the full viewport height */
+}

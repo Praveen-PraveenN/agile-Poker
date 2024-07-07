@@ -1,0 +1,34 @@
+/* users-and-chart.component.css */
+
+/* Grid Container */
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .table-container {
+    height: 400px; /* Set the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal overflow if not needed */
+  }
+  
+  /* Left Side (Users List) */
+  .left-side {
+    width: 50%;
+    padding: 1%;
+  }
+  
+  /* Right Side (Chart) */
+  .right-side {
+    width: 50%;
+    padding: 1%;
+
+  }
+  
+  /* Chart Container (adjust as needed) */
+  .chart-container {
+    display: flex;
+   
+  }
+  

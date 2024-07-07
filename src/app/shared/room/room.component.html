@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgilePoker</title>
+</head>
+
+<body [style.padding]="isNameEntered ? '3%' : '2%'">
+
+    <mat-toolbar *ngIf="isNameEntered" style="overflow: hidden;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon style="color: rgb(255, 153, 0);">stars</mat-icon>
+        </button>
+        <span> Agile Poker</span>
+        <span class="example-spacer"></span>
+
+        <button *ngIf="isOwner" mat-flat-button color="primary" (click)="revealEstimates()">Reveal
+            Estimates</button>
+
+        <span class="example-spacer"></span>
+
+        <button *ngIf="isOwner" mat-flat-button color="primary" (click)="resetEstimates()">Reset</button>
+
+        <span class="example-spacer"></span>
+
+
+        <button mat-flat-button color="primary" [cdkCopyToClipboard]="invitationUrl" (click)="onCopyclick()">
+            <mat-icon>share</mat-icon>
+            <span style="margin-right: 5px;">Room Link</span>
+            <span style="color: black"> - </span> {{ copyButton }}
+        </button>
+        <span class="example-spacer"></span>
+        <!-- <button mat-mini-fab color="primary" class="example-icon" (click)="shareUrl()" >
+            <mat-icon >share</mat-icon>
+          </button> -->
+
+        <button mat-mini-fab class="account-icon" matTooltip="{{userName}}" (click)="accountInfo()"
+            matTooltipClass="example-tooltip-uppercase">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </mat-toolbar>
+
+
+
+
+    <div *ngIf="!isNameEntered" style="height: 100vh;">
+
+        <app-create-room [buttonText]="buttonText" (loginEvent)="ngOnInit()"> </app-create-room>
+    </div>
+    <div *ngIf="isNameEntered">
+        <br><br>
+        <div *ngIf="!reveal" class="container" style="border: 0px transparent;padding: 1%;">
+            <button mat-raised-button *ngFor="let data of cardData" class="card" [style.background-color]="data.color"
+                (click)="onCardClick(data.point)">
+                <div class="card-content">
+                    <button mat-raised-button class="point" style="background-color: transparent;">{{ data.point
+                        }}</button>
+                </div>
+            </button>
+
+        </div>
+
+        <br>
+        <!-- <div class="container1">
+            <div style="float: left; width: 70%;">
+                <div>
+                    <h2 style="float:left;" *ngIf="users?.length">User List</h2>
+                </div>
+                <br>
+                <div class="user-list">
+                    <div class="user-card" *ngFor="let user of users">
+                        <div class="user-details">
+                            <p> <b>{{ user?.userName }} </b> : <span>{{ user?.selectedCard > 0 ? (reveal ?
+                                    user?.selectedCard : '👍') :'👎' }} </span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="float: right; width: 30%;">
+
+                <br>
+                <canvasjs-chart *ngIf="reveal" [options]="chartOptions"
+                    [styles]="{width: '80%', height:'200px'}"></canvasjs-chart>
+            </div>
+
+        </div> -->
+
+    </div>
+
+    <app-users-chart *ngIf="isNameEntered" [reveal]="reveal" [users]="users" [averagePoints]="averagePoints"></app-users-chart>
+
+
+
+
+</body>
+
+</html>

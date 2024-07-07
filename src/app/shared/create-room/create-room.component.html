@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agilepoker</title>
+</head>
+<body class="background-image-container" style="padding: 20%; background-color: aqua;">
+  <h1 style="text-align: center;">Welcome to Agile Poker </h1>
+
+
+<form class="user-form" style="text-align: center;" [formGroup]="userForm" (ngSubmit)="createRoom()" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>UserName</mat-label>
+      <input matInput formControlName="userName" placeholder="Ex: Praveen">
+      <mat-error *ngIf="userForm.get('userName')?.hasError('required')">UserName is required</mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit" fxFlex="50" [disabled]="!userForm.valid">{{buttonText}}</button>
+  </form>
+</body>
+</html>
