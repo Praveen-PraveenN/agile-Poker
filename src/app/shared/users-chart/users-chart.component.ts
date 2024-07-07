@@ -26,9 +26,8 @@ export class UsersChartComponent {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.updateChartOptions();
-    }, 1000);
+    this.updateChartOptions();
+
   }
 
   displayedColumns: string[] = ['username', 'points'];

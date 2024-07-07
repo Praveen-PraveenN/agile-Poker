@@ -24,9 +24,9 @@ export class RoomComponent {
   createdBy: string = '';
   hideShareButton = false;
   averagePoints: any;
-  isOwner : boolean = false;
+  isOwner: boolean = false;
 
-  chartOptions : any = {
+  chartOptions: any = {
     animationEnabled: true,
     theme: "light",
     data: [{
@@ -63,7 +63,7 @@ export class RoomComponent {
     console.log(this.userName)
     const source = interval(2000); //  seconds
     this.subscription = source.subscribe(() =>
-    this.getData()
+      this.getData()
 
     );
     this.getData();
@@ -82,6 +82,10 @@ export class RoomComponent {
           this.isNameEntered = true;
           this.reveal = data[0].reveal;
           this.isOwner = data[0].isOwner;
+          if (this.reveal) {
+            this.calculateAverage();
+            this.usersChartComp?.updateChartOptions();
+          }
         }
         else {
           this.isNameEntered = false;
@@ -123,16 +127,13 @@ export class RoomComponent {
     for (let index = 0; index < dataPoints.length; index++) {
       const element = dataPoints[index];
       const repeatedTimes = element.repeatedTimes;
-      const totalPoints = dataPoints.map((data)=>data.repeatedTimes)
-      const sum = totalPoints.reduce((accumulator : any, currentValue:any) => accumulator + currentValue, 0);
+      const totalPoints = dataPoints.map((data) => data.repeatedTimes)
+      const sum = totalPoints.reduce((accumulator: any, currentValue: any) => accumulator + currentValue, 0);
 
-      const data : any = { name: element.name, y: (repeatedTimes/sum) * 100 };
+      const data: any = { name: element.name, y: (repeatedTimes / sum) * 100 };
       //finalDataPoints.push({ name: element.name, y: (repeatedTimes/sum) * 100 })
       this.chartOptions.data[0].dataPoints.push(data)
-
-      
     }
-  console.log(this.chartOptions)
 
   }
 
@@ -144,13 +145,16 @@ export class RoomComponent {
   }
 
   revealEstimates() {
+    this.fire.setBatchReveal(this.roomId, true);
+    this.calculateAverage();
+    this.usersChartComp?.updateChartOptions();
+  }
+
+  calculateAverage() {
     const totalPoints = this.users?.reduce((acc: any, user: any) => acc + user?.selectedCard, 0);
     console.log(totalPoints)
     let avg = totalPoints / this.users.length;
     this.averagePoints = avg?.toFixed(2);
-    this.fire.setBatchReveal(this.roomId, true);
-    this.usersChartComp?.updateChartOptions();
-
   }
 
   resetEstimates() {
