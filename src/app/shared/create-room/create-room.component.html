@@ -12,7 +12,7 @@
 <form class="user-form" style="text-align: center;" [formGroup]="userForm" (ngSubmit)="createRoom()" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>UserName</mat-label>
-      <input matInput formControlName="userName" placeholder="Ex: Praveen">
+      <input matInput formControlName="userName" placeholder="Ex: Dhoni">
       <mat-error *ngIf="userForm.get('userName')?.hasError('required')">UserName is required</mat-error>
     </mat-form-field>
   
