@@ -2,69 +2,30 @@
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
-  /* Adjust spacing between cards */
 
 }
 
 .card {
   width: 200px;
-  /* Adjust card width as needed */
   height: 300px;
-  /* Adjust card height as needed */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc;
-  /* Example border styling */
   border-radius: 8px;
+
 }
+
 
 .card-content {
   text-align: center;
-  /* Center text horizontally */
 }
 
 .point {
   font-size: 24px;
-  /* Adjust font size as needed */
   font-weight: bold;
-  /* Example font weight */
 }
 
-.container1 {
-  display: flex;
-  justify-content: space-between;
-}
-
-.left-section {
-  width: 80%;
-  margin-right: 20px;
-}
-
-.right-section {
-  flex: 1;
-}
-
-.user-list {
-  display: flex;
-  flex-wrap: wrap;
-  /* Allows items to wrap to the next line */
-  padding: 10px;
-}
-
-.user-card {
-  width: 100px;
-  /* Fixed width for each card */
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.user-details {
-  text-align: center;
-}
 
 .button-container {
   display: flex;
@@ -72,13 +33,23 @@
   justify-content: center;
 }
 
-.footer {
-  text-align: center;
-  /* Optional: Center the text */
-  margin-top: auto;
+.right-align {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
+.space {
+  margin-left: 5%;
+}
+
+
+/* For mobile devices */
+@media (max-width: 767px) {}
+
+/* For tablets and desktops */
+@media (min-width: 768px) {}

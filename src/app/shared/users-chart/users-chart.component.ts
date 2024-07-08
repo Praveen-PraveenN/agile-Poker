@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-users-chart',
@@ -8,8 +8,11 @@ import { Component, Input } from '@angular/core';
 export class UsersChartComponent {
 
   @Input() reveal: boolean = false;
+  @Input() isOwner: boolean = false;
   @Input() users: any;
   @Input() averagePoints: any;
+  @Output() revealEstimatesEvent = new EventEmitter<void>();
+  @Output() resetEvent = new EventEmitter<void>();
 
   chartOptions: any = {
     animationEnabled: true,
@@ -27,6 +30,7 @@ export class UsersChartComponent {
 
   ngOnInit() {
     this.updateChartOptions();
+
   }
 
   displayedColumns: string[] = ['username', 'points'];
@@ -57,22 +61,28 @@ export class UsersChartComponent {
       //finalDataPoints.push({ name: element.name, y: (repeatedTimes/sum) * 100 })
       finalPointsData.push(data)
 
-      this.chartOptions = {
-        animationEnabled: true,
-        theme: "light",
-        data: [{
-          type: "pie",
-          title: {
-            text: "Pie Chart"
-          },
-          indexLabel: "{name}",
-          indexLabelPlacement: "inside",
-          dataPoints: finalPointsData
-        }]
-      }
+    }
+
+    this.chartOptions = {
+      animationEnabled: true,
+      theme: "light",
+      data: [{
+        type: "pie",
+        title: {
+          text: "Pie Chart"
+        },
+        indexLabel: "{name}",
+        indexLabelPlacement: "inside",
+        dataPoints: finalPointsData
+      }]
     }
 
   }
 
-
+  revealEstimates() {
+    this.revealEstimatesEvent.emit();
+  }
+  resetEstimates() {
+    this.resetEvent.emit();
+  }
 }
