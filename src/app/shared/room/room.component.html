@@ -10,36 +10,23 @@
 <body [style.padding]="isNameEntered ? '3%' : '2%'">
 
     <mat-toolbar *ngIf="isNameEntered" style="overflow: hidden;">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon style="color: rgb(255, 153, 0);">stars</mat-icon>
+        <button mat-mini-fab class="example-icon" matTooltip="Developed by Nallatigala Praveen">
+            <mat-icon style="color: rgb(255, 153, 0);background-color:aqua; border-radius: 20px;">stars</mat-icon>
         </button>
-        <span> Agile Poker</span>
+        <span style="margin-left: 1%;">Agile Poker</span>
         <span class="example-spacer"></span>
 
-        <button *ngIf="isOwner" mat-flat-button color="primary" (click)="revealEstimates()">Reveal
-            Estimates</button>
+        <div class="right-align">
 
-        <span class="example-spacer"></span>
-
-        <button *ngIf="isOwner" mat-flat-button color="primary" (click)="resetEstimates()">Reset</button>
-
-        <span class="example-spacer"></span>
-
-
-        <button mat-flat-button color="primary" [cdkCopyToClipboard]="invitationUrl" (click)="onCopyclick()">
-            <mat-icon>share</mat-icon>
-            <span style="margin-right: 5px;">Room Link</span>
-            <span style="color: black"> - </span> {{ copyButton }}
-        </button>
-        <span class="example-spacer"></span>
-        <!-- <button mat-mini-fab color="primary" class="example-icon" (click)="shareUrl()" >
-            <mat-icon >share</mat-icon>
-          </button> -->
-
-        <button mat-mini-fab class="account-icon" matTooltip="{{userName}}" (click)="accountInfo()"
-            matTooltipClass="example-tooltip-uppercase">
-            <mat-icon>account_circle</mat-icon>
-        </button>
+            <button mat-flat-button color="primary" class="space" [cdkCopyToClipboard]="invitationUrl"
+                (click)="onCopyclick()">
+                <span><mat-icon style="vertical-align:bottom;font-size: medium;">share</mat-icon> </span>{{ copyButton
+                }}&nbsp;
+            </button>
+            <!-- <button mat-mini-fab class="account-icon space" matTooltip="{{userName}}" (click)="accountInfo()" matTooltipClass="example-tooltip-uppercase">
+                <mat-icon>account_circle</mat-icon>
+            </button> -->
+        </div>
     </mat-toolbar>
 
 
@@ -55,42 +42,20 @@
             <button mat-raised-button *ngFor="let data of cardData" class="card" [style.background-color]="data.color"
                 (click)="onCardClick(data.point)">
                 <div class="card-content">
-                    <button mat-raised-button class="point" style="background-color: transparent;">{{ data.point
-                        }}</button>
+                    <button mat-raised-button class="point" style="background-color: transparent;">
+                        {{ data.point}}</button>
                 </div>
             </button>
 
         </div>
 
         <br>
-        <!-- <div class="container1">
-            <div style="float: left; width: 70%;">
-                <div>
-                    <h2 style="float:left;" *ngIf="users?.length">User List</h2>
-                </div>
-                <br>
-                <div class="user-list">
-                    <div class="user-card" *ngFor="let user of users">
-                        <div class="user-details">
-                            <p> <b>{{ user?.userName }} </b> : <span>{{ user?.selectedCard > 0 ? (reveal ?
-                                    user?.selectedCard : '👍') :'👎' }} </span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="float: right; width: 30%;">
-
-                <br>
-                <canvasjs-chart *ngIf="reveal" [options]="chartOptions"
-                    [styles]="{width: '80%', height:'200px'}"></canvasjs-chart>
-            </div>
-
-        </div> -->
 
     </div>
 
-    <app-users-chart *ngIf="isNameEntered" [reveal]="reveal" [users]="users" [averagePoints]="averagePoints"></app-users-chart>
+    <app-users-chart *ngIf="isNameEntered" [reveal]="reveal" [users]="users" [averagePoints]="averagePoints"
+        [isOwner]="isOwner" (revealEstimatesEvent)="revealEstimates()"
+        (resetEvent)="resetEstimates()"></app-users-chart>
 
 
 

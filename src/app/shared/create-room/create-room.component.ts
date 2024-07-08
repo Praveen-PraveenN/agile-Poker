@@ -29,7 +29,6 @@ export class CreateRoomComponent {
 
   async createRoom() {
     const user = this.userForm.value.userName;
-    console.log(this.buttonText)
     if (this.buttonText === 'Create') {
       let obj: {
         createdBy: string,
@@ -48,8 +47,6 @@ export class CreateRoomComponent {
       if (this.userForm.valid) {
         sessionStorage.setItem('agilepoker-userName', user);
         const userName = sessionStorage.getItem('agilepoker-userName');
-        console.log(userName)
-        console.log(obj)
         await this.fire.createRoom(uuid, user);
 
         this.router.navigateByUrl(`room/${uuid}`);
@@ -59,7 +56,6 @@ export class CreateRoomComponent {
 
       sessionStorage.setItem('agilepoker-userName', user);
       const userName = sessionStorage.getItem('agilepoker-userName');
-      console.log(userName);
 
       this.fire.addUserToRoom(this.guid, user, false,false);
       this.router.navigateByUrl(`room/${this.guid}`);

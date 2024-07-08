@@ -18,7 +18,7 @@ export class RoomComponent {
   currentUrl: string;
   roomId: any;
   invitationUrl: any;
-  copyButton: string = 'Share';
+  copyButton: string = ' Room Link ';
   usersData: any
   reveal: boolean = false;
   createdBy: string = '';
@@ -57,10 +57,8 @@ export class RoomComponent {
     });
     this.invitationUrl = window.location.href;
 
-    console.log(sessionStorage.getItem('agilepoker-userName'))
 
     this.userName = sessionStorage.getItem('agilepoker-userName');
-    console.log(this.userName)
     const source = interval(2000); //  seconds
     this.subscription = source.subscribe(() =>
       this.getData()
@@ -73,7 +71,6 @@ export class RoomComponent {
   getData() {
 
     this.fire.getUsersInRoom(this.roomId).subscribe(users => {
-      console.log(users)
 
       if (users.length) {
         this.users = users?.sort((a: any, b: any) => a?.userName?.localeCompare(b?.userName));
@@ -95,15 +92,14 @@ export class RoomComponent {
         this.router.navigateByUrl('')
       }
     });
-    console.log('usersdata')
 
   }
 
   onCopyclick() {
     this.hideShareButton = true;
-    this.copyButton = 'Copied URL ✅';
+    this.copyButton = ' Copied URL ✅';
     setTimeout(() => {
-      this.copyButton = 'Share';
+      this.copyButton = ' Room Link ';
       this.hideShareButton = false;
 
     }, 5000);
@@ -152,8 +148,8 @@ export class RoomComponent {
 
   calculateAverage() {
     const totalPoints = this.users?.reduce((acc: any, user: any) => acc + user?.selectedCard, 0);
-    console.log(totalPoints)
-    let avg = totalPoints / this.users.length;
+    const validUsers = this.users.filter((user: any) => user.selectedCard > 0);
+    let avg = totalPoints / validUsers.length;
     this.averagePoints = avg?.toFixed(2);
   }
 
